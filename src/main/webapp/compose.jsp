@@ -57,9 +57,9 @@
 
 
 
-<div class="container col-5">
+<div class="container col-5 mt-10">
 <h1>New Mail</h1>
-<div class="card">
+<div class="card border-secondary">
 	<div class="card-body">
 		<form action="new-email" method="post">
   <div class="mb-3">
@@ -76,7 +76,9 @@
     <input type="text" class="form-control" name="message" id="exampleInputEmail1" > 
   </div>
  
-  <button type="submit" class="btn btn-primary">Send</button>
+  
+  <button type="reset" value="reset" class="btn btn-danger">Clear</button>
+  <button type="submit" class="btn btn-success">Send</button>
 </form>
 	</div>
 </div>

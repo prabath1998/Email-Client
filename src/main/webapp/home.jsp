@@ -4,6 +4,9 @@
     <%@page import="com.dto.*" %>
     <%@page import="com.util.*" %>
      <%@ page import="java.sql.*" %>
+     
+    
+     
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,11 +16,20 @@
 
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+<script src="https://kit.fontawesome.com/238816e1e6.js" crossorigin="anonymous"></script>
 
 
 </head>
 <body>
+
+ <%
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
+response.setHeader("Pragma", "no-cache");
+response.setHeader("Expires", "0"); 
+
+%>
+
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" href="home.jsp">Cmail</a>
@@ -52,7 +64,15 @@
             <%=userDto.getEmail() %>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="login.jsp">Logout</a></li>
+            <li><a class="dropdown-item" href="login.jsp">
+            
+           <!--  <form action="logout" method="post">
+    			<input type="submit" value="Logout" />
+			</form>  -->
+           Logout
+          
+            
+            </a></li>
             
           </ul>
         </li>
@@ -66,7 +86,7 @@
 
 <div>
 
-<table class="table table-dark table-hover">
+<table class="table table-borderless table-striped table-hover">
 <form action="trash-mail" method="post">
 <tr>
 <th>Id</th>
@@ -92,7 +112,9 @@
 					<td><%=rs.getString("sender") %></td>
 					<td><%=rs.getString("subject") %></td>
 					<td><%=rs.getString("message") %></td>
-					<td><button type="submit" name="trash" value="<%=rs.getString("email_id") %>" class="btn btn-danger">x</button></td>					
+					<td><button type="submit" name="trash" value="<%=rs.getString("email_id") %>" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Move to trash">
+					<i class="fa-solid fa-trash"></i>
+					</button></td>					
 					</tr>
 				<%
 			}

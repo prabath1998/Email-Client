@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Trash</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/238816e1e6.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -55,10 +56,10 @@
   </div>
 </nav>
 <h1>trash</h1>
-<%=request.getParameter("delete") %>
+
 
 <div>
-<table class="table table-dark table-hover">
+<table class="table table-borderless table-striped table-hover">
 <form action="delete-mail" method="post">
 <tr>
 <th>Id</th>
@@ -75,7 +76,7 @@
 		try{
 			
 			Connection conn = JDBCUtil.getConnection();
-			String selectSQL = "SELECT * FROM emails where sender = '" + emailId + "' and status='TRASH' ";
+			String selectSQL = "SELECT * FROM emails where (sender = '" + emailId + "' OR reciever = '" + emailId + "')  AND status='TRASH' ";
 			Statement stm = conn.createStatement();
 			ResultSet rs = stm.executeQuery(selectSQL);
 			while(rs.next()){
@@ -88,7 +89,9 @@
 					<td><%=rs.getString("reciever") %></td>
 					<td><%=rs.getString("subject") %></td>
 					<td><%=rs.getString("message") %></td>
-					<td><button type="submit" name="delete" value="<%=rs.getString("email_id") %>" class="btn btn-danger">x</button></td>					
+					<td><button type="submit" name="delete" value="<%=rs.getString("email_id") %>" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete permenently">
+					<i class="fa-solid fa-eraser"></i>
+					</button></td>					
 					</tr>
 				<%
 			}

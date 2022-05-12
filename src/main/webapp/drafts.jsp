@@ -9,7 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Drafts</title>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/238816e1e6.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -57,7 +59,7 @@
 <h1>drafts</h1>
 
 <div>
-<table class="table table-dark  table-hover">
+<table class="table table-borderless table-striped table-hover">
 <form action="trash-mail" method="post">
 <tr>
 <th>Id</th>
@@ -83,7 +85,9 @@
 					<td><%=rs.getString("subject") %></td>
 					<td><%=rs.getString("message") %></td>
 					<!-- <td><input type="submit" name="trash" value="x" class="btn btn-danger"></td> -->
-					<td><button type="submit" name="trash" value="<%=rs.getString("email_id") %>" class="btn btn-danger">x</button></td>					
+					<td><button type="submit" name="trash" value="<%=rs.getString("email_id") %>" class="btn btn-danger">
+					<i class="fa-solid fa-trash"></i>
+					</button></td>					
 					</tr>
 				<%
 			}

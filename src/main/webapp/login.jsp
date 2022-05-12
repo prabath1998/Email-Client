@@ -10,7 +10,7 @@
 </head>
 <body>
 
-
+<%session.invalidate(); %>
 <div class="login">
   <div class="login-triangle"></div>
   

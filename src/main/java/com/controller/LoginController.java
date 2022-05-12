@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import jakarta.websocket.Session;
 
 import java.io.IOException;
 
@@ -37,14 +37,19 @@ public class LoginController extends HttpServlet {
 		user.setPassword(password);
 		
 		UserService userService = new UserService();
-		if (userService.validate(user)) {
+		
+		
+		
+		if (userService.validate(user)) {			
 			UserDTO email = userService.getId(username);
 			request.getSession().setAttribute("email", email);
 			response.sendRedirect("home.jsp");
 		}else {
+			
 			response.sendRedirect("login.jsp");
 			
 		}  
+		
 	}
 
 }
