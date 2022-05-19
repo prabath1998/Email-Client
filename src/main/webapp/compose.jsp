@@ -7,14 +7,21 @@
 <meta charset="UTF-8">
 <title>Compose</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<style type="text/css">
 
+<style type="text/css">
+body {
+	background-color: #f0f0f0;
+}
 </style>
+
+<script src="https://kit.fontawesome.com/238816e1e6.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="home.jsp">Cmail</a>
+    <a class="navbar-brand" href="home.jsp">
+    <i class="fa-solid fa-envelopes-bulk"></i>
+    Cmail</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -42,6 +49,8 @@
        <ul class="navbar-nav ms-auto"">
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          	<i class="fa-solid fa-user-tie"></i>
+          	&nbsp;
             <%UserDTO userDto = (UserDTO)session.getAttribute("email");%> 
             <%=userDto.getEmail() %>
           </a>
@@ -57,8 +66,8 @@
 
 
 
-<div class="container col-5 mt-10">
-<h1>New Mail</h1>
+<div class="container col-5">
+<h3 class="text-secondary">New Mail</h3>
 <div class="card border-secondary">
 	<div class="card-body">
 		<form action="new-email" method="post">
@@ -77,8 +86,14 @@
   </div>
  
   
-  <button type="reset" value="reset" class="btn btn-danger">Clear</button>
-  <button type="submit" class="btn btn-success">Send</button>
+  <button type="reset" value="reset" class="btn btn-danger">
+ 	Clear
+ <!-- <i class="fa-solid fa-ban"></i> -->
+  </button>
+  <button type="submit" class="btn btn-success">
+  Send
+  <i class="fa-solid fa-paper-plane"></i>
+  </button>
 </form>
 	</div>
 </div>

@@ -15,7 +15,9 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="home.jsp">Cmail</a>
+    <a class="navbar-brand" href="home.jsp">
+    <i class="fa-solid fa-envelopes-bulk"></i>
+    Cmail</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -43,6 +45,8 @@
        <ul class="navbar-nav ms-auto"">
             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-user-tie"></i>
+          	&nbsp;
             <%UserDTO userDto = (UserDTO)session.getAttribute("email");%> 
             <%=userDto.getEmail() %>
           </a>
@@ -55,7 +59,7 @@
     </div>
   </div>
 </nav>
-<h1>outbox</h1>
+<h3 class="text-secondary">outbox</h3>
 
 <div>
 <table class="table table-borderless table-striped  table-hover">
@@ -83,7 +87,7 @@
 					<td><%=rs.getString("reciever") %></td>
 					<td><%=rs.getString("subject") %></td>
 					<td><%=rs.getString("message") %></td>
-					<td><button type="submit" name="trash" value="<%=rs.getString("email_id") %>" class="btn btn-danger">
+					<td><button type="submit" name="trash" value="<%=rs.getString("email_id") %>" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Move to trash">
 					<i class="fa-solid fa-trash"></i>
 					</button></td>					
 					</tr>
