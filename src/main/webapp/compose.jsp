@@ -68,6 +68,7 @@ body {
 
 <div class="container col-5">
 <h3 class="text-secondary">New Mail</h3>
+
 <div class="card border-secondary">
 	<div class="card-body">
 		<form action="new-email" method="post">

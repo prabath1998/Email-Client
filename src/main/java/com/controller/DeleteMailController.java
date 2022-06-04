@@ -83,10 +83,14 @@ public class DeleteMailController extends HttpServlet {
 //			} catch (Exception e) {
 //
 //			}
+			request.setAttribute("success", "Email deleted successfully..!");
+			RequestDispatcher rd = request.getRequestDispatcher("trash.jsp");
+			rd.include(request, response);
 		}
+//		
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("trash.jsp");
+//		dispatcher.forward(request, response);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("trash.jsp");
-		dispatcher.forward(request, response);
 	}
 
 }

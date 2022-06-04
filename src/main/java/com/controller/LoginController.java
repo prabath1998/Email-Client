@@ -1,5 +1,6 @@
 package com.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 
 import jakarta.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.websocket.Session;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import com.dto.UserDTO;
 import com.service.UserService;
@@ -18,6 +20,7 @@ import com.service.UserService;
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
+	
     public LoginController() {
         super();
        
@@ -31,6 +34,7 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username =  request.getParameter("email");
 		String password =  request.getParameter("password");
+		 PrintWriter out = response.getWriter();
 		
 		UserDTO user = new UserDTO();
 		user.setEmail(username);
@@ -46,9 +50,10 @@ public class LoginController extends HttpServlet {
 			response.sendRedirect("home.jsp");
 		}else {
 			
-			response.sendRedirect("login.jsp");
-			
-		}  
+			request.setAttribute("error", "Invalid login credentials");
+			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			rd.include(request, response);			
+		}  	
 		
 	}
 

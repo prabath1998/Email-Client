@@ -100,9 +100,11 @@ public class EmailController extends HttpServlet {
 				String status = "DRAFT";
 				email.setStatus(status);
 				EmailDTO emailDTO = emailService.getMailsById(reciever);
-				request.getSession().setAttribute("emailDTO", emailDTO);
+				request.getSession().setAttribute("emailDTO", emailDTO);				
 
 				emailService.sendEmail(email);
+				
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -136,7 +138,7 @@ public class EmailController extends HttpServlet {
 		 
 		
 		 
-		 
+//		 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request, response);
 

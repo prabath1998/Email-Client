@@ -12,6 +12,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/238816e1e6.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -60,11 +61,15 @@
     </div>
   </div>
 </nav>
+
+
+ <span style="color: green;">${success}</span>
+  
 <h3 class="text-secondary">trash</h3>
 
 
 <div>
-<table class="table table-borderless table-striped table-hover">
+<table class="table table-borderless table-hover table-striped">
 <form action="delete-mail" method="post">
 <tr>
 <th>Id</th>
