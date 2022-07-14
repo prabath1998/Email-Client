@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" >
   <div class="container-fluid">
     <a class="navbar-brand" href="home.jsp">
     <i class="fa-solid fa-envelopes-bulk"></i>
@@ -77,7 +77,9 @@
 <th>To</th>
 <th>Subject</th>
 <th>Message</th>
+<th>Time</th>
 <th></th>
+
 </tr>
 
  <% 
@@ -86,7 +88,7 @@
 		try{
 			
 			Connection conn = JDBCUtil.getConnection();
-			String selectSQL = "SELECT * FROM emails where (sender = '" + emailId + "' OR reciever = '" + emailId + "')  AND status='TRASH' ";
+			String selectSQL = "SELECT * FROM emails where (sender = '" + emailId + "' OR reciever = '" + emailId + "' )  AND status='TRASH' ";
 			Statement stm = conn.createStatement();
 			ResultSet rs = stm.executeQuery(selectSQL);
 			while(rs.next()){
@@ -99,9 +101,19 @@
 					<td><%=rs.getString("reciever") %></td>
 					<td><%=rs.getString("subject") %></td>
 					<td><%=rs.getString("message") %></td>
-					<td><button type="submit" name="delete" value="<%=rs.getString("email_id") %>" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete permenently">
+					<td><%=rs.getString("time") %></td>
+					<%-- <td>
+					<form method="post" action="return-mail">
+					<button type="submit" name="restore" value="<%=rs.getString("email_id") %>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Restore">
+					<i class="fa-solid fa-arrow-rotate-left"></i>
+					</button>
+					</form>
+					</td> --%>
+					<td>
+					<button type="submit" name="delete" value="<%=rs.getString("email_id") %>" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete permenently">
 					<i class="fa-solid fa-eraser"></i>
-					</button></td>					
+					</button>
+					</td>					
 					</tr>
 				<%
 			}

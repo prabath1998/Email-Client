@@ -5,15 +5,12 @@
 <%@page import="com.util.*"%>
 <%@ page import="java.sql.*"%>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Inbox</title>
 <!-- <link rel="stylesheet" href="css/bootstrap.css">  -->
-
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -23,6 +20,15 @@
 <script src="https://kit.fontawesome.com/238816e1e6.js"
 	crossorigin="anonymous"></script>
 
+<style type="text/css">
+/* body{
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg,#2980b9, #8e44ad);
+  height: 100vh;
+  overflow: hidden;
+} */
+</style>
 
 </head>
 <body>
@@ -33,7 +39,7 @@
 	response.setHeader("Expires", "0");
 	%>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" >
 		<div class="container-fluid">
 			<a class="navbar-brand" href="home.jsp"> <i
 				class="fa-solid fa-envelopes-bulk"></i> Cmail
@@ -56,8 +62,6 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="trash.jsp">Trash</a>
 					</li>
-
-
 				</ul>
 
 				<ul class="navbar-nav ms-auto"">
@@ -69,35 +73,25 @@
 							<%=userDto.getEmail()%>
 					</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="login.jsp"> <!--  <form action="logout" method="post">
-    			<input type="submit" value="Logout" />
-			</form>  --> Logout
-
-
-							</a></li>
+							<li><a class="dropdown-item" href="login.jsp"> Logout</a></li>
 
 						</ul></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-
 	<h3 class="text-secondary">Inbox</h3>
-
-
 	<div>
-
-		<table class="table table-borderless table-striped table-hover">
+		<table class="table table-borderless table-hover">
 			<form action="trash-mail" method="post">
 				<tr>
 					<th>Id</th>
 					<th>From</th>
 					<th>Subject</th>
 					<th>Message</th>
+					<th>Time</th>
 					<th></th>
 				</tr>
-
-
 				<%
 				String emailId = userDto.getEmail();
 				try {
@@ -111,10 +105,11 @@
 				<tr>
 					<td><%=rs.getString("email_id")%></td>
 					<td><%=rs.getString("sender")%></td>
-					<td><%=rs.getString("subject")%></td>
+					<td><i><%=rs.getString("subject")%></i></td>
 					<td><%=rs.getString("message")%></td>
+					<td><%=rs.getString("time")%></td>
 					<td><button type="submit" name="trash"
-							value="<%=rs.getString("email_id")%>" class="btn btn-danger"
+							value="<%=rs.getString("email_id")%>" class="btn btn-warning"
 							data-toggle="tooltip" data-placement="top" title="Move to trash">
 							<i class="fa-solid fa-trash"></i>
 						</button></td>
@@ -126,26 +121,7 @@
 				ex.printStackTrace();
 				}
 				%>
-
-				<%-- <%EmailService emailService = new EmailService(); %>
- <%EmailDTO emailDTO = emailService.getMailsById(userDto.getEmail());%> 
- <%EmailDTO email = new EmailDTO();%> 
-            <tr>
-            <td><%=emailDTO.getSender() %></td>
-            <td><%=email.getSubject() %></td>
-            <td><%=email.getMessage() %></td>
- 			<td><button class="btn btn-danger">x</button></td>
-            </tr> --%>
-			</form>
-		</table>
-
-		<!-- <form action="trash-mail" method="post">
-<input type="submit" name="trash" class="btn btn-success" value="test">
-</form> -->
-
-	</div>
-
-
+		</div>
 </body>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

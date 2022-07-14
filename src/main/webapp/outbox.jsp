@@ -69,6 +69,7 @@
 <th>To</th>
 <th>Subject</th>
 <th>Message</th>
+<th>Time</th>
 <th></th>
 </tr>
 
@@ -87,7 +88,8 @@
 					<td><%=rs.getString("reciever") %></td>
 					<td><%=rs.getString("subject") %></td>
 					<td><%=rs.getString("message") %></td>
-					<td><button type="submit" name="trash" value="<%=rs.getString("email_id") %>" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Move to trash">
+					<td><%=rs.getString("time")%></td>
+					<td><button type="submit" name="trash" value="<%=rs.getString("email_id") %>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Move to trash">
 					<i class="fa-solid fa-trash"></i>
 					</button></td>					
 					</tr>

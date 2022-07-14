@@ -14,7 +14,7 @@ public class EmailService {
 		Connection connection = null;
 		PreparedStatement preStat = null;
 
-		String insertSQL = "INSERT INTO emails(sender,reciever,subject,message,status)VALUES(?,?,?,?,?)";
+		String insertSQL = "INSERT INTO emails(sender,reciever,subject,message,status,time)VALUES(?,?,?,?,?,?)";
 		int result = 0;
 
 		try {
@@ -25,6 +25,7 @@ public class EmailService {
 			preStat.setString(3, email.getSubject());
 			preStat.setString(4, email.getMessage());
 			preStat.setString(5, email.getStatus());
+			preStat.setString(6, email.getCurrentTime());
 
 			System.out.println(preStat);
 
@@ -34,9 +35,7 @@ public class EmailService {
 		}
 
 		return result;
-	}
-	
-	
+	}	
 
 	public static void updateStatus(int email) throws SQLException {
 		Connection connection = null;
@@ -58,9 +57,29 @@ public class EmailService {
 			System.out.println(e.getMessage());
 		}
 
-	}
+	}	
 	
-	
+	public static void updateStatusToDraft(int email) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preStat = null;
+
+		String updateSQL = "UPDATE emails SET status = 'DRAFT' where email_id = ?";
+		int result = 0;
+
+		try {
+			connection = JDBCUtil.getConnection();
+			preStat = connection.prepareStatement(updateSQL);
+//			preStat.setString(1, email.getStatus());
+			preStat.setInt(1, email);
+
+			System.out.println(preStat);
+
+			result = preStat.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}	
 
 	public EmailDTO getMailsById(String email) {
 		Connection connection = null;
@@ -113,6 +132,7 @@ public class EmailService {
 				emailDTO.setSubject(rs.getString("subject"));
 				emailDTO.setMessage(rs.getString("message"));
 				emailDTO.setStatus(rs.getString("status"));
+				emailDTO.setCurrentTime(rs.getString("time"));
 			}
 
 		} catch (SQLException e) {

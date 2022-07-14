@@ -53,8 +53,7 @@ public class TrashMailController extends HttpServlet {
 			System.out.println("trash is checked");
 			EmailService emailService = new EmailService();
 			EmailDTO emailDTO = new EmailDTO();
-			UserDTO userEmail = (UserDTO) request.getSession().getAttribute("email");
-			
+			UserDTO userEmail = (UserDTO) request.getSession().getAttribute("email");		
 			
 			int eid = 0;
 
@@ -65,32 +64,8 @@ public class TrashMailController extends HttpServlet {
 			} catch (SQLException e) {
 				
 				e.printStackTrace();
-			}
-
-//			try {
-//				Connection connection = null;
-//				PreparedStatement preStat = null;
-//
-//				String getAll = "SELECT * FROM emails";
-//				connection = JDBCUtil.getConnection();
-//				preStat = connection.prepareStatement(getAll);
-//				ResultSet rs = preStat.executeQuery();
-//
-//				while (rs.next()) {
-//
-//					emailDTO.setEmail_id(rs.getInt("email_id"));
-//					emailId = rs.getInt("email_id");
-//
-//				}
-//				emailService.updateStatus(emailId);
-//
-//			} catch (Exception e) {
-//
-//			}
-		}
-		
-		
-		
+			}		
+		}		
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request, response);

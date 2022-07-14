@@ -27,7 +27,7 @@ public class JDBCUtil {
 		}
 		
 		if (connection != null) {
-			System.out.println("Connection is up and running");
+//			System.out.println("Connection is up and running");
 		}else {
 			System.out.println("Connection is null");
 		}

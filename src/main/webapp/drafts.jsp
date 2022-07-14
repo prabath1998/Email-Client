@@ -14,7 +14,7 @@
 <script src="https://kit.fontawesome.com/238816e1e6.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" >
   <div class="container-fluid">
     <a class="navbar-brand" href="home.jsp">
     <i class="fa-solid fa-envelopes-bulk"></i>
@@ -70,6 +70,7 @@
 <th>To</th>
 <th>Subject</th>
 <th>Message</th>
+<th>Time</th>
 <th></th>
 </tr>
 
@@ -84,12 +85,13 @@
 			while(rs.next()){
 				%>
 					<tr>
-					<td><%=rs.getString("email_id") %></td>
+					<td><%=rs.getString("email_id") %></td>					
 					<td><%=rs.getString("reciever") %></td>
 					<td><%=rs.getString("subject") %></td>
 					<td><%=rs.getString("message") %></td>
-					<!-- <td><input type="submit" name="trash" value="x" class="btn btn-danger"></td> -->
-					<td><button type="submit" name="trash" value="<%=rs.getString("email_id") %>" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Move to trash">
+					<td><%=rs.getString("time")%></td>
+					<!-- <td><input type="submit" name="trash" value="x" class="btn btn-warning"></td> -->
+					<td><button type="submit" name="trash" value="<%=rs.getString("email_id") %>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Move to trash">
 					<i class="fa-solid fa-trash"></i>
 					</button></td>					
 					</tr>

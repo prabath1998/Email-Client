@@ -7,10 +7,15 @@ public class EmailDTO {
 	private String subject;
 	private String message;
 	private String status;
+	private String currentTime;
 	
 	public EmailDTO() {}
 
-	public EmailDTO(int email_id, String reciever, String sender, String subject, String message, String status) {
+	
+	
+
+	public EmailDTO(int email_id, String reciever, String sender, String subject, String message, String status,
+			String currentTime) {
 		super();
 		this.email_id = email_id;
 		this.reciever = reciever;
@@ -18,9 +23,22 @@ public class EmailDTO {
 		this.subject = subject;
 		this.message = message;
 		this.status = status;
+		this.currentTime = currentTime;
 	}
+
 	
-	
+
+	public String getCurrentTime() {
+		return currentTime;
+	}
+
+
+	public void setCurrentTime(String currentTime) {
+		this.currentTime = currentTime;
+	}
+
+
+
 
 	public int getEmail_id() {
 		return email_id;

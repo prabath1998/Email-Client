@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.dto.EmailDTO;
 import com.dto.UserDTO;
@@ -47,40 +49,12 @@ public class EmailController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-//		UserDTONew userDto2 = (UserDTONew)session.getAttribute("userDto");
-		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date date = new Date();
+		String ctime = formatter.format(date);
 
-		
-
-//		if (request.getParameter("reciever") != null && request.getParameter("subject") != null && request.getParameter("message") != null) {
-//			UserDTO userEmail = (UserDTO) request.getSession().getAttribute("email");
-//			EmailService emailService = new EmailService();
-//
-//			String sender = userEmail.getEmail();
-//			String reciever = request.getParameter("reciever");
-//			String subject = request.getParameter("subject");
-//			String message = request.getParameter("message");
-//			String status = "SENT";
-//
-//			EmailDTO email = new EmailDTO();
-//			email.setSender(sender);
-//			email.setReciever(reciever);
-//			email.setSubject(subject);
-//			email.setMessage(message);
-//			email.setStatus(status);
-//			try {
-//				EmailDTO emailDTO = emailService.getMailsById(reciever);
-//				request.getSession().setAttribute("emailDTO", emailDTO);
-//
-//				emailService.sendEmail(email);
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		
-//			
-//		}
-		
-		 if(request.getParameter("reciever").isEmpty() || request.getParameter("subject").isEmpty() || request.getParameter("message").isEmpty()){
+		if (request.getParameter("reciever").isEmpty() || request.getParameter("subject").isEmpty()
+				|| request.getParameter("message").isEmpty()) {
 			UserDTO userEmail = (UserDTO) request.getSession().getAttribute("email");
 			EmailService emailService = new EmailService();
 
@@ -88,6 +62,7 @@ public class EmailController extends HttpServlet {
 			String reciever = request.getParameter("reciever");
 			String subject = request.getParameter("subject");
 			String message = request.getParameter("message");
+			String time = ctime;
 //			String status = "SENT";
 
 			EmailDTO email = new EmailDTO();
@@ -95,21 +70,21 @@ public class EmailController extends HttpServlet {
 			email.setReciever(reciever);
 			email.setSubject(subject);
 			email.setMessage(message);
+			email.setCurrentTime(time);
 //			email.setStatus(status);
 			try {
 				String status = "DRAFT";
 				email.setStatus(status);
 				EmailDTO emailDTO = emailService.getMailsById(reciever);
-				request.getSession().setAttribute("emailDTO", emailDTO);				
+				request.getSession().setAttribute("emailDTO", emailDTO);
 
 				emailService.sendEmail(email);
-				
-				
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
-		}else {
+
+		} else {
 			UserDTO userEmail = (UserDTO) request.getSession().getAttribute("email");
 			EmailService emailService = new EmailService();
 
@@ -118,6 +93,7 @@ public class EmailController extends HttpServlet {
 			String subject = request.getParameter("subject");
 			String message = request.getParameter("message");
 			String status = "SENT";
+			String time = ctime;
 
 			EmailDTO email = new EmailDTO();
 			email.setSender(sender);
@@ -125,20 +101,16 @@ public class EmailController extends HttpServlet {
 			email.setSubject(subject);
 			email.setMessage(message);
 			email.setStatus(status);
+			email.setCurrentTime(time);
 			try {
 				EmailDTO emailDTO = emailService.getMailsById(reciever);
 				request.getSession().setAttribute("emailDTO", emailDTO);
-
 				emailService.sendEmail(email);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		
 		}
 		 
-		
-		 
-//		 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request, response);
 

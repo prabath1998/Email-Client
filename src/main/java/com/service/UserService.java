@@ -57,9 +57,7 @@ public class UserService {
 			System.out.println(e.getMessage());
 		}
 		return user;
-	}
-	
-	
+	}	
 	
 	public boolean validate(UserDTO user) {
 		Connection connection = null;

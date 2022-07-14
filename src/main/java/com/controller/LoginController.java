@@ -34,15 +34,13 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username =  request.getParameter("email");
 		String password =  request.getParameter("password");
-		 PrintWriter out = response.getWriter();
+		PrintWriter out = response.getWriter();
 		
 		UserDTO user = new UserDTO();
 		user.setEmail(username);
 		user.setPassword(password);
 		
-		UserService userService = new UserService();
-		
-		
+		UserService userService = new UserService();		
 		
 		if (userService.validate(user)) {			
 			UserDTO email = userService.getId(username);

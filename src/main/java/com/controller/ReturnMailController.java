@@ -7,26 +7,22 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.dto.EmailDTO;
 import com.dto.UserDTO;
 import com.service.EmailService;
-import com.util.JDBCUtil;
 
 /**
- * Servlet implementation class DeleteMailController
+ * Servlet implementation class ReturnMailController
  */
-public class DeleteMailController extends HttpServlet {
+public class ReturnMailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteMailController() {
+    public ReturnMailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,30 +39,28 @@ public class DeleteMailController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("delete") != null) {
-			System.out.println("delete is checked");
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		if (request.getParameter("restore") != null) {
+			System.out.println("restore is checked");
 			EmailService emailService = new EmailService();
 			EmailDTO emailDTO = new EmailDTO();
-			UserDTO userEmail = (UserDTO) request.getSession().getAttribute("email");
-			int emailId = 0;
+			UserDTO userEmail = (UserDTO) request.getSession().getAttribute("email");		
+			
 			int eid = 0;
 
-			eid = Integer.parseInt(request.getParameter("delete"));
-//			System.out.println(eid);
+			eid = Integer.parseInt(request.getParameter("restore"));
+			System.out.println(eid);
 			try {
-				emailService.deleteEmail(eid);
+				emailService.updateStatusToDraft(eid);
 			} catch (SQLException e) {
 				
 				e.printStackTrace();
-			}			
-			request.setAttribute("success", "Email deleted successfully..!");
-			RequestDispatcher rd = request.getRequestDispatcher("trash.jsp");
-			rd.include(request, response);
-		}
-//		
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("trash.jsp");
-//		dispatcher.forward(request, response);
-		
+			}		
+		}		
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("trash.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }
