@@ -63,14 +63,14 @@
 </nav>
 
 
- <span style="color: green;">${success}</span>
+ <span style="color: red;">${success}</span>
   
 <h3 class="text-secondary">trash</h3>
 
 
 <div>
-<table class="table table-borderless table-hover table-striped">
-<form action="delete-mail" method="post">
+<table class="table table-borderless table-hover">
+
 <tr>
 <th>Id</th>
 <th>From</th>
@@ -78,6 +78,7 @@
 <th>Subject</th>
 <th>Message</th>
 <th>Time</th>
+<th></th>
 <th></th>
 
 </tr>
@@ -109,11 +110,32 @@
 					</button>
 					</form>
 					</td> --%>
-					<td>
+					<%-- <td>
 					<button type="submit" name="delete" value="<%=rs.getString("email_id") %>" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete permenently">
 					<i class="fa-solid fa-eraser"></i>
 					</button>
-					</td>					
+					</td> --%>	
+					
+					<td>
+
+						<form action="delete-mail" method="post">
+							<button type="submit" name="delete"
+								value="<%=rs.getString("email_id")%>" class="btn btn-danger"
+								data-toggle="tooltip" data-placement="top" title="delete permenently">
+								<i class="fa-solid fa-eraser"></i>
+							</button>
+						</form>
+					</td>
+					<td>
+						<form action="ViewMailContaroller" method="post">
+							<button type="submit" name="view"
+								value="<%=rs.getString("email_id")%>" class="btn btn-light"
+								data-toggle="tooltip" data-placement="top" title="view">
+								<i class="fa-solid fa-eye"></i>
+							</button>
+						</form>
+
+					</td>				
 					</tr>
 				<%
 			}
@@ -122,7 +144,7 @@
 			ex.printStackTrace();
 		}
 		%>
-</form>
+
 </table>
 
 </div>

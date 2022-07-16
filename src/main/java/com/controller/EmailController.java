@@ -79,6 +79,10 @@ public class EmailController extends HttpServlet {
 				request.getSession().setAttribute("emailDTO", emailDTO);
 
 				emailService.sendEmail(email);
+				
+				request.setAttribute("success", "Email save as a draft..!");
+				RequestDispatcher rd = request.getRequestDispatcher("compose.jsp");
+				rd.include(request, response);
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -106,13 +110,17 @@ public class EmailController extends HttpServlet {
 				EmailDTO emailDTO = emailService.getMailsById(reciever);
 				request.getSession().setAttribute("emailDTO", emailDTO);
 				emailService.sendEmail(email);
+				
+				request.setAttribute("success", "Email sent successfully..!");
+				RequestDispatcher rd = request.getRequestDispatcher("compose.jsp");
+				rd.include(request, response);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
-		dispatcher.forward(request, response);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+//		dispatcher.forward(request, response);
 
 	}
 

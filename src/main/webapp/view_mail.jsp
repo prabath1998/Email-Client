@@ -1,17 +1,23 @@
-<%@page import="com.service.EmailService"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%-- <%@page import="com.dto.UserDTO"%> --%>
 <%@page import="com.dto.*"%>
 <%@page import="com.util.*"%>
 <%@ page import="java.sql.*"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Inbox</title>
-<!-- <link rel="stylesheet" href="css/bootstrap.css">  -->
-
+<title>Insert title here</title>
+<style type="text/css">
+.card {
+	margin: 0 auto; /* Added */
+	float: none; /* Added */
+	margin-bottom: 10px; /* Added */
+	width: 200px;
+	margin-top: 100px;
+}
+</style>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -19,17 +25,6 @@
 	crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/238816e1e6.js"
 	crossorigin="anonymous"></script>
-
-<style type="text/css">
-/* body{
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(120deg,#2980b9, #8e44ad);
-  height: 100vh;
-  overflow: hidden;
-} */
-</style>
-
 </head>
 <body>
 
@@ -69,9 +64,8 @@
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<i class="fa-solid fa-user-tie"></i> &nbsp; <%
- 							UserDTO userDto = (UserDTO) session.getAttribute("email");
- 							%>
-							<%=userDto.getEmail()%>
+ UserDTO userDto = (UserDTO) session.getAttribute("email");
+ %> <%=userDto.getEmail()%>
 					</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="login.jsp"> Logout</a></li>
@@ -81,68 +75,51 @@
 			</div>
 		</div>
 	</nav>
-	<h3 class="text-secondary">Inbox</h3>
-	<div>
-		<table class="table table-borderless table-hover">
 
-			<tr>
-				<th>Id</th>
-				<th>From</th>
-				<th>Subject</th>
-				<th>Message</th>
-				<th>Time</th>
-				<th></th>
-				<th></th>
-			</tr>
-			<%
-			String emailId = userDto.getEmail();
-			try {
 
-				Connection conn = JDBCUtil.getConnection();
-				String selectSQL = "SELECT * FROM emails where reciever = '" + emailId + "' and status = 'SENT'";
-				Statement stm = conn.createStatement();
-				ResultSet rs = stm.executeQuery(selectSQL);
-				while (rs.next()) {
-			%>
-			<tr>
-				<td><%=rs.getString("email_id")%></td>
-				<td><%=rs.getString("sender")%></td>
-				<td><i><%=rs.getString("subject")%></i></td>
-				<td><%=rs.getString("message")%></td>
-				<td><%=rs.getString("time")%></td>
-				<td>
-					
-						<form action="trash-mail" method="post">
-							<button type="submit" name="trash"
-								value="<%=rs.getString("email_id")%>" class="btn btn-warning"
-								data-toggle="tooltip" data-placement="top" title="Move to trash">
-								<i class="fa-solid fa-trash"></i>
-							</button>
-						</form>
-				</td>
-				<td>
-						<form action="ViewMailContaroller" method="post">
-							<button type="submit" name="view"
-								value="<%=rs.getString("email_id")%>" class="btn btn-light"
-								data-toggle="tooltip" data-placement="top" title="view">
-								<i class="fa-solid fa-eye"></i>
-							</button>
-						</form>
-					
-				</td>
-			</tr>
-			<%
-			}
-			} catch (Exception ex) {
-			out.println(ex.getMessage());
-			ex.printStackTrace();
-			}
-			%>
+	<%
+	String email = userDto.getEmail();
+	int eid = (Integer) session.getAttribute("email_id");
+
+	try {
+
+		Connection conn = JDBCUtil.getConnection();
+		String selectSQL = "SELECT * FROM emails where (reciever = '" + email + "' OR sender = '" + email + "') and email_id = '" + eid + "' ";
+		Statement stm = conn.createStatement();
+		ResultSet rs = stm.executeQuery(selectSQL);
+		while (rs.next()) {
+	%>
+
+
+
+	<div class="col d-flex justify-content-center">
+		<div class="card" style="width: 50rem;">
+			<div class="card-body">
+				<h5 class="card-title">
+					<%=rs.getString("subject")%>
+				</h5>
+				<h6 class="card-subtitle mb-2 text-muted"><%=rs.getString("sender")%></h6>
+				<p class="card-text">
+					<%=rs.getString("message")%>
+				</p>
+				<p class="card-footer text-muted">
+					<%=rs.getString("time")%>
+				</p>
+				<p><a href="home.jsp" class="text-danger">Back</a></p>
 			</div>
+		</div>
+	</div>
+
+	<%
+	}
+	} catch (Exception ex) {
+	out.println(ex.getMessage());
+	ex.printStackTrace();
+	}
+	%>
 </body>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-
 </html>

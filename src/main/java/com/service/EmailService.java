@@ -160,5 +160,34 @@ public class EmailService {
 			connection.close();
 		}
 	}
+	
+	public EmailDTO getById(int email) {
+		Connection connection = null;
+		PreparedStatement preStat = null;
+		ResultSet rs = null;
+
+		String selectQuery = "SELECT * from emails where email_id= ?";
+		EmailDTO emailDTO = new EmailDTO();
+
+		try {
+			connection = JDBCUtil.getConnection();
+			preStat = connection.prepareStatement(selectQuery);
+			preStat.setInt(1, email);
+			System.out.println(preStat);
+			rs = preStat.executeQuery();
+			System.out.println(rs);
+			while (rs.next()) {
+				emailDTO.setReciever(rs.getString("reciever"));
+				emailDTO.setSender(rs.getString("sender"));
+				emailDTO.setSubject(rs.getString("subject"));
+				emailDTO.setMessage(rs.getString("message"));
+				emailDTO.setStatus(rs.getString("status"));
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return emailDTO;
+	}
 
 }

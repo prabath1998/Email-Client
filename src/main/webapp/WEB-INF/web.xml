@@ -3,7 +3,6 @@
   <display-name>email-client</display-name>
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
-    
   </welcome-file-list>
   <servlet>
     <description></description>
@@ -74,5 +73,15 @@
   <servlet-mapping>
     <servlet-name>ReturnMailController</servlet-name>
     <url-pattern>/return-mail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewMailContaroller</display-name>
+    <servlet-name>ViewMailContaroller</servlet-name>
+    <servlet-class>com.controller.ViewMailContaroller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewMailContaroller</servlet-name>
+    <url-pattern>/ViewMailContaroller</url-pattern>
   </servlet-mapping>
 </web-app>

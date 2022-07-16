@@ -87,6 +87,8 @@ body {
 					data-bs-target="#staticBackdrop">
 					<i class="fa-solid fa-circle-plus"></i> New
 					</button>
+					<br>
+					<span style="color: green;">${success}</span>
   			</div>
 		</div>
 
@@ -116,8 +118,9 @@ body {
 											class="form-control" name="subject" id="exampleInputEmail1">
 									</div>
 									<div class="mb-3">
-										<label class="form-label">Message</label> <input type="text"
-											class="form-control" name="message" id="exampleInputEmail1">
+										<label class="form-label">Message</label> 
+										<!-- <input type="text" class="form-control" name="message" id="exampleInputEmail1"> -->
+										<textarea class="form-control" name="message" id="exampleInputEmail1" rows="5" cols="6"></textarea>
 									</div>
 
 
